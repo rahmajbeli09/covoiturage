@@ -12,7 +12,7 @@ class onBoardingSlider extends GetView<OnboardingcontrollerImp> {
     return PageView.builder(
       controller: controller.pageController,
       onPageChanged: (val){
-
+        controller.onPageChanged(val);
       },
               itemCount: onBoardingList.length,
               itemBuilder: (context ,i) => Column(children: [

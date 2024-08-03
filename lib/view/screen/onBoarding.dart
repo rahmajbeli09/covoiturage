@@ -2,6 +2,7 @@ import 'package:covo/controller/onBoardingController.dart';
 import 'package:covo/view/widget/onBoarding/dotController.dart';
 import 'package:covo/view/widget/onBoarding/onBoardingButton.dart';
 import 'package:covo/view/widget/onBoarding/onBoardingSlider.dart';
+import 'package:covo/view/widget/onBoarding/skip.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,14 +19,15 @@ class OnBoarding extends StatelessWidget {
             flex: 4,
             child:  onBoardingSlider(),
           ),
-          SizedBox(height: 80,),
+          SizedBox(height: 50,),
           Expanded(
             flex:1,
             child : Column(children: [
          Dotcontroller(),
            SizedBox(height: 20,),
            Onboardingbutton(),
-         Text("Skip", style:  TextStyle(fontWeight: FontWeight.bold , fontSize: 16 , fontFamily: "Gupter" ))
+          Skip()
+         
             ],))
         ],
       ),

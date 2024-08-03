@@ -1,9 +1,12 @@
+import 'package:covo/core/constant/routes.dart';
+import 'package:covo/data/datasource/static/static.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 abstract class Onboardingcontroller extends GetxController{
   next();
   onPageChanged(int index);
+  skip();
 }
 class OnboardingcontrollerImp extends Onboardingcontroller {
   
@@ -12,7 +15,12 @@ class OnboardingcontrollerImp extends Onboardingcontroller {
   @override
   next() {
     currentPage++;
-    pageController.animateToPage(currentPage, duration: const Duration(microseconds: 900), curve: Curves.easeInOut);
+    if(currentPage >onBoardingList.length -1){
+        Get.offAllNamed(AppRoute.login);
+    }else{
+          pageController.animateToPage(currentPage, duration: const Duration(microseconds: 900), curve: Curves.easeInOut);
+
+    }
   }
 
   @override
@@ -25,6 +33,11 @@ class OnboardingcontrollerImp extends Onboardingcontroller {
   void onInit() {
     pageController = PageController();
     super.onInit();
+  }
+  
+  @override
+  skip() {
+    Get.offAllNamed(AppRoute.login);
   }
   
 }

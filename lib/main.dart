@@ -1,3 +1,4 @@
+import 'package:covo/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'view/screen/onBoarding.dart';
@@ -13,10 +14,8 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(
-       
-      ),
       home: OnBoarding(),
+      routes: routes,
     );
   }
 }
