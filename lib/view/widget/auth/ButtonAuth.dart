@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ButtonAuth extends StatelessWidget {
-  const ButtonAuth({Key? key}) : super(key: key);
-
+  final String text;
+  final void Function()? onPressed;
+  const ButtonAuth({Key? key, required this.text, this.onPressed}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,9 +14,11 @@ class ButtonAuth extends StatelessWidget {
                            color:  Color.fromARGB(255, 211, 150, 19),
             ),
             child: MaterialButton(
-            onPressed: (){
-            },
-            child:const  Text("Se Connecter", style:  TextStyle(fontWeight: FontWeight.bold , fontSize: 20 , fontFamily: "Gupter" ))
+            onPressed: 
+              onPressed,
+            
+            child:  Text(text,
+             style: const TextStyle(fontWeight: FontWeight.bold , fontSize: 20 , fontFamily: "Gupter" ))
            ),
     );
   }
