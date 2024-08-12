@@ -106,6 +106,7 @@ class Login extends StatelessWidget {
                         fontSize: 16,
                         fontFamily: "Gupter",
                         decoration: TextDecoration.underline,
+                        color: Color.fromARGB(255, 211, 150, 19),
                       ),
                     ),
                   ),

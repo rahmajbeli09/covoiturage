@@ -52,7 +52,7 @@ class SignUp extends StatelessWidget {
                 //mycontroller: ,
               ),
               const SizedBox(height: 20),
-              const ButtonAuth(text: "s'inscrire",),
+               ButtonAuth(text: "s'inscrire",onPressed: (){controller.toSucessSignUp();},),
               const SizedBox(height: 45),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -69,6 +69,7 @@ class SignUp extends StatelessWidget {
                         fontSize: 16,
                         fontFamily: "Gupter",
                         decoration: TextDecoration.underline,
+                        color: Color.fromARGB(255, 211, 150, 19),
                       ),
                     ),
                   ),

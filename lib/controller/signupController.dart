@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 
 abstract class SignUpController extends GetxController{
   toLogin();
+  toSucessSignUp();
 }
 
 class SignUpControllerImp extends SignUpController{
@@ -31,6 +32,11 @@ class SignUpControllerImp extends SignUpController{
     username.dispose();
     password.dispose();
     super.dispose();
+  }
+  
+  @override
+  toSucessSignUp() {
+    Get.offAllNamed(AppRoute.successSignUp);
   }
 
 }

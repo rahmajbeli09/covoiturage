@@ -1,11 +1,14 @@
+import 'package:covo/controller/verifycodecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
 
 class VerifyCode extends StatelessWidget {
   const VerifyCode({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    VerifyCodeControllerImp controller = Get.put(VerifyCodeControllerImp());
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,7 +26,9 @@ class VerifyCode extends StatelessWidget {
               borderColor: const Color.fromARGB(255, 211, 150, 19),
               showFieldAsBox: true,
               onCodeChanged: (String code){},
-              onSubmit: (String verificationCode ){},
+              onSubmit: (String verificationCode ){
+                controller.toResetPassword();
+              },
             ),
           ],
         ),
