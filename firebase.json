@@ -1,0 +1,1 @@
+{"flutter":{"platforms":{"android":{"default":{"projectId":"covoix","appId":"1:229761735637:android:21f03e8f29ff60697d7b5c","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"covoix","configurations":{"android":"1:229761735637:android:21f03e8f29ff60697d7b5c","ios":"1:229761735637:ios:32d17fda578aa6cc7d7b5c"}}}}}}

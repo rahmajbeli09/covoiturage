@@ -1,9 +1,9 @@
-import 'package:covo/controller/signupController.dart';
+import 'package:covo/controller/auth/signupController.dart';
 import 'package:covo/view/widget/auth/textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widget/auth/ButtonAuth.dart';
+import '../../widget/auth/ButtonAuth.dart';
 
 class Successsignup extends StatelessWidget {
   const Successsignup({Key? key}) : super(key: key);

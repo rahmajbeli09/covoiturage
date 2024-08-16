@@ -11,12 +11,11 @@ class ButtonAuth extends StatelessWidget {
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10),
               ),
-                           color:  Color.fromARGB(255, 211, 150, 19),
+              color:  Color.fromARGB(255, 211, 150, 19),
             ),
             child: MaterialButton(
             onPressed: 
               onPressed,
-            
             child:  Text(text,
              style: const TextStyle(fontWeight: FontWeight.bold , fontSize: 20 , fontFamily: "Gupter" ))
            ),

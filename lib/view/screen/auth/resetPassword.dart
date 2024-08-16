@@ -1,9 +1,9 @@
-import 'package:covo/controller/resetpasswordController.dart';
+import 'package:covo/controller/auth/resetpasswordController.dart';
 import 'package:covo/view/widget/auth/ButtonAuth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widget/auth/textField.dart';
+import '../../widget/auth/textField.dart';
 
 class ResetPassword extends StatelessWidget {
   const ResetPassword({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
-import 'package:covo/controller/forgetpassController.dart';
+import 'package:covo/controller/auth/forgetpassController.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../widget/auth/ButtonAuth.dart';
-import '../widget/auth/textField.dart';
+import '../../widget/auth/ButtonAuth.dart';
+import '../../widget/auth/textField.dart';
 
 class MotDePasseOublie extends StatelessWidget {
   const MotDePasseOublie({Key? key}) : super(key: key);

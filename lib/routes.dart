@@ -1,13 +1,13 @@
-import 'package:covo/view/screen/motdepasseoubli%C3%A9.dart';
+import 'package:covo/view/screen/auth/motdepasseoubli%C3%A9.dart';
 import 'package:covo/core/constant/routes.dart';
-import 'package:covo/view/screen/login.dart';
-import 'package:covo/view/screen/resetPassword.dart';
-import 'package:covo/view/screen/signup.dart';
-import 'package:covo/view/screen/success.dart';
-import 'package:covo/view/screen/verifycode.dart';
+import 'package:covo/view/screen/auth/login.dart';
+import 'package:covo/view/screen/auth/resetPassword.dart';
+import 'package:covo/view/screen/auth/signup.dart';
+import 'package:covo/view/screen/auth/success.dart';
+import 'package:covo/view/screen/auth/verifycode.dart';
 import 'package:flutter/material.dart';
 
-import 'view/screen/successSignUp.dart';
+import 'view/screen/auth/successSignUp.dart';
 
 Map<String , Widget Function(BuildContext)> routes = {
  AppRoute.login : (context) => const Login(),

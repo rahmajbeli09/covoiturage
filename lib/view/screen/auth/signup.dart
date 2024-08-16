@@ -1,4 +1,7 @@
-import 'package:covo/controller/signupController.dart';
+import 'dart:core';
+
+import 'package:covo/controller/auth/signupController.dart';
+import 'package:covo/data/model/usermodel.dart';
 import 'package:covo/view/widget/auth/ButtonAuth.dart';
 import 'package:covo/view/widget/auth/textField.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +13,7 @@ class SignUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     SignUpControllerImp controller = Get.put(SignUpControllerImp());
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -23,8 +27,11 @@ class SignUp extends StatelessWidget {
               const SizedBox(height: 40),
               const Text("ReCouCou !", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 40, fontFamily: "Gupter")),
               const SizedBox(height: 40),
+              Form(
+                key: _formKey,
+                child: Column(children: [
                TextF(
-                mycontroller: controller.username,
+                mycontroller: controller.nom,
                 hinttext: "Entrer Votre Nom D'utilisateur",
                 labeltext: "Nom d'utilisateur",
                 icon: Icons.person_2_outlined,
@@ -38,7 +45,7 @@ class SignUp extends StatelessWidget {
                 //mycontroller: ,
               ),
                TextF(
-                mycontroller: controller.phone,
+                mycontroller: controller.num,
                 hinttext: "Entrer Votre numéro de telephone",
                 labeltext: "Numéro",
                 icon: Icons.phone_android_outlined,
@@ -52,7 +59,22 @@ class SignUp extends StatelessWidget {
                 //mycontroller: ,
               ),
               const SizedBox(height: 20),
-               ButtonAuth(text: "s'inscrire",onPressed: (){controller.toSucessSignUp();},),
+               ButtonAuth(text: "s'inscrire",
+               onPressed: (){
+                if(_formKey.currentState!.validate()){
+                  controller.registerUser(controller.email.text.trim(), controller.password.text.trim());
+                }
+               // controller.toSucessSignUp();
+               final user = UserModel(
+                email: controller.email.text.trim(),
+                 nom: controller.nom.text.trim(), 
+                 password: controller.password.text.trim(),
+                  num: controller.num.text.trim()
+                  );
+                  controller.createUser(user);
+                  controller.toLogin();
+                },),
+              ],)),
               const SizedBox(height: 45),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

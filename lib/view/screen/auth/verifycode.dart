@@ -1,4 +1,4 @@
-import 'package:covo/controller/verifycodecontroller.dart';
+import 'package:covo/controller/auth/verifycodecontroller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';

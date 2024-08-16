@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "229761735637",
+    "project_id": "covoix",
+    "storage_bucket": "covoix.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:229761735637:android:21f03e8f29ff60697d7b5c",
+        "android_client_info": {
+          "package_name": "com.example.covo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKgBwrWiLgp43cLDK2q430hLwilsmZQX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -34,13 +34,13 @@ class Home extends StatelessWidget {
                       onTap: controller.toggleSearchField,
                       child: Image.asset(
                         Imageasset.search,
-                        height: 45,
+                        height: 35,
                       ),
                     ),
                     Obx(() {
                       return AnimatedContainer(
                         duration: const Duration(milliseconds: 500),
-                        width: controller.showSearchField.value ? 280.0 : 0.0,
+                        width: controller.showSearchField.value ? 350.0 : 0.0,
                         curve: Curves.linear,
                         child: controller.showSearchField.value
                             ? Padding(
@@ -57,8 +57,7 @@ class Home extends StatelessWidget {
                             : Container(),
                       );
                     }),
-                    const Spacer(),
-                    Image.asset(Imageasset.noti),
+                    
                   ],
                 ),
               ),

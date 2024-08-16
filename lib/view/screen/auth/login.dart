@@ -1,10 +1,9 @@
-import 'package:covo/controller/loginController.dart';
+import 'package:covo/controller/auth/loginController.dart';
 import 'package:covo/core/constant/imageasset.dart';
 import 'package:covo/view/widget/auth/textField.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../widget/auth/ButtonAuth.dart';
+import '../../widget/auth/ButtonAuth.dart';
 
 class Login extends StatelessWidget {
   const Login({Key? key}) : super(key: key);
@@ -12,6 +11,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     LoginControllerImp controller = Get.put(LoginControllerImp());
+    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -49,38 +49,49 @@ class Login extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-               TextF(
+              Form(
+                key: _formKey,
+                child: Column(children: [
+                TextF(
                 mycontroller: controller.email,
                 hinttext: "Entrer Votre Email",
                 labeltext: "Email",
                 icon: Icons.email_outlined,
-               
               ),
-               TextF(
+              TextF(
                 mycontroller: controller.password,
                 hinttext: "Entrer Votre Mot De Passe",
                 labeltext: "Mot De Passe",
                 icon: Icons.lock_clock_outlined,
-                // mycontroller: ,
               ),
               const SizedBox(height: 20),
-              const ButtonAuth(text: "Se Connecter"),
+              ButtonAuth(
+                text: "Se Connecter",
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    controller.email.text.trim(); 
+                    controller.password.text.trim();
+                    controller.login();
+                  }
+                },
+              )
+              ],)),
               const SizedBox(height: 15),
-             Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  MaterialButton(onPressed: (){
-                    controller.toForgetPassword();
-                  },
-                  child: const Text(
-                    "Mot De Passe Oublié",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
-                      fontFamily: "Gupter",
-                      decoration: TextDecoration.underline,
+                  MaterialButton(
+                    onPressed: controller.toForgetPassword,
+                    child: const Text(
+                      "Mot De Passe Oublié",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                        fontFamily: "Gupter",
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
-                  ),)
+                  ),
                 ],
               ),
               const SizedBox(height: 80),
@@ -96,9 +107,7 @@ class Login extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {
-                      controller.toSignUp();
-                    },
+                    onTap: controller.toSignUp,
                     child: const Text(
                       " S'inscrire",
                       style: TextStyle(
