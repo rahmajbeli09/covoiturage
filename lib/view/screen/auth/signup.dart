@@ -59,21 +59,33 @@ class SignUp extends StatelessWidget {
                 //mycontroller: ,
               ),
               const SizedBox(height: 20),
-               ButtonAuth(text: "s'inscrire",
-               onPressed: (){
-                if(_formKey.currentState!.validate()){
-                  controller.registerUser(controller.email.text.trim(), controller.password.text.trim());
-                }
-               // controller.toSucessSignUp();
-               final user = UserModel(
-                email: controller.email.text.trim(),
-                 nom: controller.nom.text.trim(), 
-                 password: controller.password.text.trim(),
-                  num: controller.num.text.trim()
-                  );
-                  controller.createUser(user);
-                  controller.toLogin();
-                },),
+               ButtonAuth(
+  text: "s'inscrire",
+  onPressed: () async {
+    if (_formKey.currentState!.validate()) {
+      try {
+        // Créez l'utilisateur dans Firebase Authentication
+        controller.registerUser(controller.email.text.trim(), controller.password.text.trim());
+
+        // Créez l'utilisateur dans Firestore après avoir réussi l'inscription
+        final user = UserModel(
+          email: controller.email.text.trim(),
+          nom: controller.nom.text.trim(), 
+          password: controller.password.text.trim(),
+          num: controller.num.text.trim()
+        );
+        await controller.createUser(user);
+
+        // Redirigez l'utilisateur après l'inscription et l'ajout dans Firestore
+        controller.toLogin();
+      } catch (e) {
+        // Gérez les erreurs ici si nécessaire
+        print('Erreur : $e');
+      }
+    }
+  },
+),
+
               ],)),
               const SizedBox(height: 45),
               Row(

@@ -4,6 +4,7 @@ import 'package:covo/view/screen/Home/chat.dart';
 import 'package:covo/view/screen/auth/login.dart';
 import 'package:covo/view/screen/auth/notification.dart';
 import 'package:covo/view/screen/Home/profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -28,6 +29,13 @@ class HomeScreenControllerImp extends HomeScreenController{
   changePage(int i) {
     currentPage = i;
     update();
+    final user = FirebaseAuth.instance.currentUser;
+if (user != null) {
+  print("User is logged in: ${user.email}");
+} else {
+  print("No user is logged in.");
+}
+
   }
 
   void logout() async {
