@@ -12,11 +12,14 @@ class AuthentificationRepository extends GetxController{
   late final Rx<User?> firebaseUser ;
 
   @override
-  void onReady(){
-    firebaseUser = Rx<User?>(_auth.currentUser);
-    firebaseUser.bindStream(_auth.userChanges());
-    ever(firebaseUser, _setInitialScreen);
-  }
+void onReady() {
+  firebaseUser = Rx<User?>(_auth.currentUser);
+  firebaseUser.bindStream(_auth.userChanges());
+  ever(firebaseUser, _setInitialScreen);
+
+  print("Utilisateur actuel: ${_auth.currentUser?.email}"); // Log l'utilisateur actuel
+}
+
 
   _setInitialScreen(User? user) {
     user == null ? Get.offAll(() => const Homescreen()) : Get.offAll(() =>const  OnBoarding());
