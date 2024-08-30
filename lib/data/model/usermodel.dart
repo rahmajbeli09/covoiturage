@@ -29,9 +29,9 @@ class UserModel {
     final data = document.data()!;
       return UserModel(
         id:document.id,
-        password: data["password"],
-        nom: data["nom"],
-        num: data["num"],
-        email : data["email"]);
+        password: data["MotDePasse"],
+        nom: data["Nom"],
+        num: data["Num"],
+        email : data["Email"]);
     }
 }

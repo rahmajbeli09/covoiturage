@@ -52,6 +52,13 @@ Future<UserModel?> getUserDetails(String email) async {
         colorText: Colors.white);
   }
 }
+Future<List<UserModel>> searchUsersByName(String name) async {
+    final snapshot = await _db.collection("users")
+      .where("Nom", isGreaterThanOrEqualTo: name)
+      .where("Nom", isLessThanOrEqualTo: name + '\uf8ff')
+      .get();
+
+    return snapshot.docs.map((e) => UserModel.fromSnapshot(e)).toList();}
 
 
 }

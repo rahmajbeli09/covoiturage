@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../controller/home/ProfileController.dart';
+import '../../../data/model/covModel.dart';
 import '../../../data/model/usermodel.dart';
 
 class Profile extends StatelessWidget {
@@ -12,19 +13,19 @@ class Profile extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: FutureBuilder(
-            future: controller.getUserData(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  UserModel userData = snapshot.data as UserModel;
-                  final nameController = TextEditingController(text: userData.nom);
-                  final emailController = TextEditingController(text: userData.email);
-                  final phoneController = TextEditingController(text: userData.num);
-                  final passwordController = TextEditingController(text: userData.password);
+        child: FutureBuilder(
+          future: controller.getUserData(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.done) {
+              if (snapshot.hasData) {
+                UserModel userData = snapshot.data as UserModel;
+                final nameController = TextEditingController(text: userData.nom);
+                final emailController = TextEditingController(text: userData.email);
+                final phoneController = TextEditingController(text: userData.num);
+                final passwordController = TextEditingController(text: userData.password);
 
-                  return Column(
+                return SingleChildScrollView(
+                  child: Column(
                     children: [
                       Stack(
                         clipBehavior: Clip.none,
@@ -125,43 +126,75 @@ class Profile extends StatelessWidget {
                               icon: Icon(controller.isEditingName.value || controller.isEditingEmail.value || controller.isEditingPhone.value ? Icons.save : Icons.edit),
                               label: Text(controller.isEditingName.value || controller.isEditingEmail.value || controller.isEditingPhone.value ? 'Enregistrer' : 'Modifier'),
                               onPressed: () async {
-  if (controller.isEditingName.value || controller.isEditingEmail.value || controller.isEditingPhone.value) {
-    // Sauvegarder les modifications
-    UserModel updatedUser = UserModel(
-      id: userData.id,  // Passer l'ID de l'utilisateur ici
-      nom: nameController.text.trim(),
-      email: emailController.text.trim(),
-      num: phoneController.text.trim(),
-      password: passwordController.text.trim(),
-    );
-    await controller.updateRecord(updatedUser);
-    controller.isEditingName.value = false;
-    controller.isEditingEmail.value = false;
-    controller.isEditingPhone.value = false;
-  } else {
-    // Passer en mode édition
-    controller.isEditingName.value = true;
-    controller.isEditingEmail.value = true;
-    controller.isEditingPhone.value = true;
-  }
-}
-
+                                if (controller.isEditingName.value || controller.isEditingEmail.value || controller.isEditingPhone.value) {
+                                  // Sauvegarder les modifications
+                                  UserModel updatedUser = UserModel(
+                                    id: userData.id,  // Passer l'ID de l'utilisateur ici
+                                    nom: nameController.text.trim(),
+                                    email: emailController.text.trim(),
+                                    num: phoneController.text.trim(),
+                                    password: passwordController.text.trim(),
+                                  );
+                                  await controller.updateRecord(updatedUser);
+                                  controller.isEditingName.value = false;
+                                  controller.isEditingEmail.value = false;
+                                  controller.isEditingPhone.value = false;
+                                } else {
+                                  // Passer en mode édition
+                                  controller.isEditingName.value = true;
+                                  controller.isEditingEmail.value = true;
+                                  controller.isEditingPhone.value = true;
+                                }
+                              }
                             )),
+                            // Trajets ajoutés par l'utilisateur connecté
+                            const SizedBox(height: 20),
+                           const Text('Mes covoix', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 10),
+                             Container(
+                              height: 200, // Définir une hauteur pour le ListView
+                              child: FutureBuilder<List<CovModel>>(
+                                future: controller.getUserTrajets(userData.id!), // Utiliser l'ID de l'utilisateur
+                                builder: (context, trajetSnapshot) {
+                                  if (trajetSnapshot.connectionState == ConnectionState.done) {
+                                    if (trajetSnapshot.hasData) {
+                                      List<CovModel> trajets = trajetSnapshot.data!;
+                                      return ListView.builder(
+                                        itemCount: trajets.length,
+                                        itemBuilder: (context, index) {
+                                          CovModel trajet = trajets[index];
+                                          return ListTile(
+                                            title: Text('Covoix de ${trajet.depart} à ${trajet.destination}'),
+                                            subtitle: Text('Départ: ${trajet.heuredep} - Retour: ${trajet.heureRentre}'),
+                                          );
+                                        },
+                                      );
+                                    } else if (trajetSnapshot.hasError) {
+                                      return Text('Erreur: ${trajetSnapshot.error}');
+                                    } else {
+                                      return const Text('Aucun trajet trouvé.');
+                                    }
+                                  } else {
+                                    return const Center(child: CircularProgressIndicator());
+                                  }
+                                },
+                              ),
+                            ),
                           ],
                         ),
                       ),
                     ],
-                  );
-                } else if (snapshot.hasError) {
-                  return Center(child: Text(snapshot.error.toString()));
-                } else {
-                  return const Center(child: Text("Something went wrong"));
-                }
+                  ),
+                );
+              } else if (snapshot.hasError) {
+                return Center(child: Text(snapshot.error.toString()));
               } else {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: Text("Something went wrong"));
               }
-            },
-          ),
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
       ),
     );
