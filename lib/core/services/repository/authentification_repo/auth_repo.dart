@@ -53,4 +53,7 @@ Future<UserCredential?> loginWithEmailAndPassword(String email, String password)
 
 
   Future<void> logout() async => await _auth.signOut();
+   String? getCurrentUserEmail() {
+    return _auth.currentUser?.email;
+    }
 }

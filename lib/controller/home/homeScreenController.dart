@@ -21,7 +21,7 @@ class HomeScreenControllerImp extends HomeScreenController{
     const Notifications(),
     const Chat(),
     const Profile(),
-    const Add(),
+     const  Add(),
     
   ];
 

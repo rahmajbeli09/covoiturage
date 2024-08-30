@@ -3,6 +3,9 @@ import 'package:covo/data/model/usermodel.dart';
 import 'package:get/get.dart';
 import 'package:covo/core/services/repository/userRepository.dart';
 
+import '../../core/services/repository/covRepository.dart';
+import '../../data/model/covModel.dart';
+
 class ProfileController extends GetxController {
   static ProfileController get instance => Get.find();
   final _authRepo = Get.put(AuthentificationRepository());
@@ -32,5 +35,8 @@ class ProfileController extends GetxController {
   updateRecord(UserModel user) async{
     await _userRepo.updateUserRecord(user);
     getUserData();
+  }
+   Future<List<CovModel>> getUserTrajets(String userId) async {
+    return await CovRepository().getUserTrajets(userId);
   }
 }
